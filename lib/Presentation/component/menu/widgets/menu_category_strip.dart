@@ -3,6 +3,7 @@ import 'package:dushka_burger/Presentation/component/menu/menu_display.dart';
 import 'package:dushka_burger/core/widgets/product_network_image.dart';
 import 'package:dushka_burger/core/theming/app_color.dart';
 import 'package:dushka_burger/core/utils/extentions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class MenuCategoryStrip extends StatelessWidget {
@@ -25,6 +26,7 @@ class MenuCategoryStrip extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = context.width;
     final height = context.height;
+    final isArabic = context.locale.languageCode == 'ar';
 
     final chipHeight = height * 0.06; 
     final imageSize = width * 0.085;
@@ -102,7 +104,7 @@ class MenuCategoryStrip extends StatelessWidget {
                     ),
                     SizedBox(width: width * 0.02),
                     Text(
-                      displayCategoryName(category),
+                      displayCategoryName(category, isArabic: isArabic),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(

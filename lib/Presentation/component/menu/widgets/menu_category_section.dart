@@ -4,6 +4,7 @@ import 'package:dushka_burger/Presentation/component/menu/widgets/menu_product_c
 import 'package:dushka_burger/Presentation/component/menu/widgets/menu_section_empty.dart';
 import 'package:dushka_burger/core/theming/app_color.dart';
 import 'package:dushka_burger/core/utils/extentions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class MenuCategorySection extends StatelessWidget {
@@ -21,6 +22,7 @@ class MenuCategorySection extends StatelessWidget {
     final width = context.width;
     final height = context.height;
     final products = category.products;
+    final isArabic = context.locale.languageCode == 'ar';
     return Padding(
       padding: EdgeInsetsDirectional.only(
         bottom: height * 0.025,
@@ -33,7 +35,7 @@ class MenuCategorySection extends StatelessWidget {
             key: headerKey,
             padding: EdgeInsets.only(bottom: height * 0.0015),
             child: Text(
-              displayCategoryName(category),
+              displayCategoryName(category, isArabic: isArabic),
               style: TextStyle(
                 fontSize: width * 0.05,
                 fontWeight: FontWeight.w700,

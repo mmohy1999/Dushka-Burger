@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dushka_burger/Presentation/component/menu/menu_screen.dart';
+import 'package:dushka_burger/Presentation/component/settings/settings_screen.dart';
 import 'package:dushka_burger/Presentation/layout/widgets/home_bottom_nav_bar.dart';
 import 'package:dushka_burger/Presentation/layout/widgets/home_nav_item_data.dart';
 import 'package:dushka_burger/Presentation/layout/widgets/home_placeholder_page.dart';
@@ -46,22 +47,22 @@ class _HomeLayoutState extends State<HomeLayout>
   Widget build(BuildContext context) {
     final items = [
       HomeNavItemData(
-        label: StringManager.home.tr(),
+        label: StringManager.home,
         selectedIcon: AppImages.homeSelected,
         unselectedIcon: AppImages.homeUnselected,
       ),
       HomeNavItemData(
-        label: StringManager.menu.tr(),
+        label: StringManager.menu,
         selectedIcon: AppImages.menuSelected,
         unselectedIcon: AppImages.menuUnselected,
       ),
       HomeNavItemData(
-        label: StringManager.offers.tr(),
+        label: StringManager.offers,
         selectedIcon: AppImages.offerSelected,
         unselectedIcon: AppImages.offerUnselected,
       ),
       HomeNavItemData(
-        label: StringManager.account.tr(),
+        label: StringManager.account,
         selectedIcon: AppImages.accountSelected,
         unselectedIcon: AppImages.accountUnselected,
       ),
@@ -99,7 +100,7 @@ class _HomeLayoutState extends State<HomeLayout>
       HomePlaceholderPage(label: StringManager.home.tr()),
       MenuScreen(),
       HomePlaceholderPage(label: StringManager.offers.tr()),
-      HomePlaceholderPage(label: StringManager.account.tr()),
+      const SettingsScreen(),
     ];
     return pages[_currentIndex];
   }

@@ -23,10 +23,13 @@ class CartLoadedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = const CartViewController();
-    final width = context.width;
-    final height = context.height;
     final emptyMessage =
         cart.message.isNotEmpty ? cart.message : StringManager.cartEmpty.tr();
+    if (cart.items.isEmpty) {
+      return CartEmptyState(message: emptyMessage);
+    }
+    final width = context.width;
+    final height = context.height;
     final totalPrice =
         '${StringManager.currencyEgp.tr()} ${controller.fallbackMoney(cart.totalPrice)}';
     final vat =
@@ -43,10 +46,7 @@ class CartLoadedView extends StatelessWidget {
         children: [
           CartHeader(onBack: onBack),
           SizedBox(height: height * 0.02),
-          if (cart.items.isEmpty)
-            CartEmptyState(message: emptyMessage)
-          else
-            CartItemList(items: cart.items, controller: controller),
+          CartItemList(items: cart.items, controller: controller),
           SizedBox(height: height * 0.028),
           const CartCouponRow(),
           SizedBox(height: height * 0.035),

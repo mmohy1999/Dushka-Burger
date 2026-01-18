@@ -2,30 +2,36 @@ import 'package:dushka_burger/Domain/entities/category.dart';
 import 'package:dushka_burger/core/resource_manager/string_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-String displayCategoryName(CategoryWithProducts category) {
-  final nameEn = category.nameEn.trim();
-  if (nameEn.isNotEmpty) {
-    return nameEn;
+String displayCategoryName(
+  CategoryWithProducts category, {
+  required bool isArabic,
+}) {
+  final primary = isArabic ? category.nameAr.trim() : category.nameEn.trim();
+  if (primary.isNotEmpty) {
+    return primary;
   }
-  final nameAr = category.nameAr.trim();
-  if (nameAr.isNotEmpty) {
-    return nameAr;
+  final fallback = isArabic ? category.nameEn.trim() : category.nameAr.trim();
+  if (fallback.isNotEmpty) {
+    return fallback;
   }
   return StringManager.category.tr();
 }
 
-String displayProductName(Product product) {
-  final nameEn = product.nameEn.trim();
-  if (nameEn.isNotEmpty) {
-    return nameEn;
+String displayProductName(
+  Product product, {
+  required bool isArabic,
+}) {
+  final primary = isArabic ? product.nameAr.trim() : product.nameEn.trim();
+  if (primary.isNotEmpty) {
+    return primary;
   }
-  final name = product.name.trim();
-  if (name.isNotEmpty) {
-    return name;
+  final fallback = product.name.trim();
+  if (fallback.isNotEmpty) {
+    return fallback;
   }
-  final nameAr = product.nameAr.trim();
-  if (nameAr.isNotEmpty) {
-    return nameAr;
+  final secondary = isArabic ? product.nameEn.trim() : product.nameAr.trim();
+  if (secondary.isNotEmpty) {
+    return secondary;
   }
   return StringManager.item.tr();
 }
@@ -48,18 +54,23 @@ String displayProductPrice(Product product) {
   return '';
 }
 
-String displayProductDescription(Product product) {
-  final descriptionEn = product.descriptionEn.trim();
-  if (descriptionEn.isNotEmpty) {
-    return descriptionEn;
+String displayProductDescription(
+  Product product, {
+  required bool isArabic,
+}) {
+  final primary =
+      isArabic ? product.descriptionAr.trim() : product.descriptionEn.trim();
+  if (primary.isNotEmpty) {
+    return primary;
   }
-  final description = product.description.trim();
-  if (description.isNotEmpty) {
-    return description;
+  final fallback = product.description.trim();
+  if (fallback.isNotEmpty) {
+    return fallback;
   }
-  final descriptionAr = product.descriptionAr.trim();
-  if (descriptionAr.isNotEmpty) {
-    return descriptionAr;
+  final secondary =
+      isArabic ? product.descriptionEn.trim() : product.descriptionAr.trim();
+  if (secondary.isNotEmpty) {
+    return secondary;
   }
   return StringManager.noDescriptionAvailable.tr();
 }

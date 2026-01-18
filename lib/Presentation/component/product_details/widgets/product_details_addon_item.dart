@@ -22,6 +22,7 @@ class ProductDetailsAddonItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = context.width;
     final height = context.height;
+    final isArabic = context.locale.languageCode == 'ar';
     final selectedIndex =
         addon.isMultiChoice ? null : _selectedSingleChoiceIndex();
     return Container(
@@ -36,7 +37,7 @@ class ProductDetailsAddonItem extends StatelessWidget {
         children: [
           RichText(
             text: TextSpan(
-              text: _displayAddonTitle(),
+              text: _displayAddonTitle(isArabic),
               style: TextStyle(
                 fontSize: width * 0.044,
                 fontWeight: FontWeight.w700,
@@ -77,11 +78,11 @@ class ProductDetailsAddonItem extends StatelessWidget {
     return null;
   }
 
-  String _displayAddonTitle() {
-    final title = addon.title.trim();
-    if (title.isNotEmpty) return title;
-    final titleAr = addon.titleAr.trim();
-    if (titleAr.isNotEmpty) return titleAr;
+  String _displayAddonTitle(bool isArabic) {
+    final primary = isArabic ? addon.titleAr.trim() : addon.title.trim();
+    if (primary.isNotEmpty) return primary;
+    final fallback = isArabic ? addon.title.trim() : addon.titleAr.trim();
+    if (fallback.isNotEmpty) return fallback;
     return StringManager.addon.tr();
   }
 }

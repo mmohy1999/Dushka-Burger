@@ -25,8 +25,12 @@ class CartItemTile extends StatelessWidget {
     final height = context.height;
     final imageSize = width * 0.19;
     final imagePadding = width * 0.012;
+    final isArabic = context.locale.languageCode == 'ar';
     final extras = controller.extractAddonLabels(item.addons);
-    final displayName = controller.displayProductName(item);
+    final displayName = controller.displayProductName(
+      item,
+      isArabic: isArabic,
+    );
     final displayPrice = controller.displayItemPrice(item);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

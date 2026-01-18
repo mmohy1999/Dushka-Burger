@@ -10,6 +10,7 @@ import 'package:dushka_burger/Presentation/manager/cart_manger/cart_state.dart';
 import 'package:dushka_burger/core/resource_manager/routes_manager.dart';
 import 'package:dushka_burger/core/theming/app_color.dart';
 import 'package:dushka_burger/core/utils/extentions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,6 +37,7 @@ class ProductDetailsContent extends StatelessWidget {
     final width = context.width;
     final height = context.height;
     final imageSize = width * 0.7;
+    final isArabic = context.locale.languageCode == 'ar';
     return SafeArea(
       child: Column(
         children: [
@@ -71,7 +73,7 @@ class ProductDetailsContent extends StatelessWidget {
                         ),
                         SizedBox(height: height * 0.03),
                         Text(
-                          displayProductName(product),
+                          displayProductName(product, isArabic: isArabic),
                           style: TextStyle(
                             fontSize: width * 0.06,
                             fontWeight: FontWeight.w700,
@@ -109,7 +111,7 @@ class ProductDetailsContent extends StatelessWidget {
                       vertical: height * 0.018,
                     ),
                     child: Text(
-                      displayProductDescription(product),
+                      displayProductDescription(product, isArabic: isArabic),
                       style: TextStyle(
                         fontSize: width * 0.038,
                         height: 1.5,

@@ -48,9 +48,10 @@ class CartScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
-          final enabled =
-              state is CartLoaded && state.response.items.isNotEmpty;
-          return CartCheckoutBar(enabled: enabled);
+          if (state is CartLoaded && state.response.items.isNotEmpty) {
+            return const CartCheckoutBar(enabled: true);
+          }
+          return const SizedBox.shrink();
         },
       ),
     );

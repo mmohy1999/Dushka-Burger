@@ -27,6 +27,7 @@ class ProductDetailsAddonOptionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = context.width;
     final height = context.height;
+    final isArabic = context.locale.languageCode == 'ar';
     final priceLabel = _displayAddonPrice();
     final control = addon.isMultiChoice
         ? Checkbox(
@@ -76,7 +77,7 @@ class ProductDetailsAddonOptionTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    _displayAddonOption(),
+                    _displayAddonOption(isArabic),
                     style: TextStyle(
                       fontSize: width * 0.04,
                       fontWeight: FontWeight.w600,
@@ -103,11 +104,11 @@ class ProductDetailsAddonOptionTile extends StatelessWidget {
     );
   }
 
-  String _displayAddonOption() {
-    final label = option.label.trim();
-    if (label.isNotEmpty) return label;
-    final labelAr = option.labelAr.trim();
-    if (labelAr.isNotEmpty) return labelAr;
+  String _displayAddonOption(bool isArabic) {
+    final primary = isArabic ? option.labelAr.trim() : option.label.trim();
+    if (primary.isNotEmpty) return primary;
+    final fallback = isArabic ? option.label.trim() : option.labelAr.trim();
+    if (fallback.isNotEmpty) return fallback;
     return StringManager.option.tr();
   }
 

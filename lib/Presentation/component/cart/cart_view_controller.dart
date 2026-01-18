@@ -1,5 +1,7 @@
+import 'package:dushka_burger/Data/models/cart.dart';
 import 'package:dushka_burger/Domain/entities/cart.dart';
 import 'package:dushka_burger/core/resource_manager/string_manager.dart';
+import 'package:dushka_burger/core/services/logger_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class CartViewController {
@@ -21,10 +23,17 @@ class CartViewController {
     return labels;
   }
 
-  String displayProductName(CartItem item) {
-    if (item.productName.trim().isNotEmpty) return item.productName;
-    if (item.productNameEn.trim().isNotEmpty) return item.productNameEn;
-    if (item.productNameAr.trim().isNotEmpty) return item.productNameAr;
+  String displayProductName(CartItem item, {required bool isArabic}) {
+    final primary = isArabic
+        ? item.productNameAr.trim()
+        : item.productNameEn.trim();
+    if (primary.isNotEmpty) return primary;
+    final fallback = item.productName.trim();
+    if (fallback.isNotEmpty) return fallback;
+    final secondary = isArabic
+        ? item.productNameEn.trim()
+        : item.productNameAr.trim();
+    if (secondary.isNotEmpty) return secondary;
     return StringManager.item.tr();
   }
 
@@ -37,5 +46,20 @@ class CartViewController {
   String fallbackMoney(String value) {
     if (value.trim().isNotEmpty) return value;
     return StringManager.zero.tr();
+  }
+
+  List<CartRequestAddon> convertToCartRequestAddon(List addons) {
+    final List<CartRequestAddon> addonList = [];
+    addons.forEach((addon) {
+      LoggerService.logError('addon: $addon');
+      addonList.add(
+        CartRequestAddon(
+          id: addon['id'],
+          name: addon['name'],
+          price: addon['price'],
+        ),
+      );
+    });
+    return addonList;
   }
 }

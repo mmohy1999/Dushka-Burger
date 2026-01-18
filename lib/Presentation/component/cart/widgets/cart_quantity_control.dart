@@ -1,6 +1,7 @@
 import 'package:dushka_burger/Data/models/cart.dart';
 import 'package:dushka_burger/Domain/entities/cart.dart';
 import 'package:dushka_burger/Presentation/component/cart/cart_theme.dart';
+import 'package:dushka_burger/Presentation/component/cart/cart_view_controller.dart';
 import 'package:dushka_burger/Presentation/manager/cart_manger/cart_cubit.dart';
 import 'package:dushka_burger/core/utils/extentions.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,7 @@ class CartQuantityControl extends StatelessWidget {
                       CartRequestItem(
                         productId: item.productId,
                         quantity: 1,
+                        addons: CartViewController().convertToCartRequestAddon(item.addons) ,
                       ),
                     ],
                   );

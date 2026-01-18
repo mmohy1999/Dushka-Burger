@@ -1,6 +1,8 @@
 import 'package:dushka_burger/Presentation/layout/widgets/home_nav_item_data.dart';
+import 'package:dushka_burger/core/services/logger_service.dart';
 import 'package:dushka_burger/core/theming/app_color.dart';
 import 'package:dushka_burger/core/utils/extentions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -32,7 +34,8 @@ class HomeNavItem extends StatelessWidget {
             SvgPicture.asset(iconPath, height: width * 0.066),
             SizedBox(height: height * 0.009),
             Text(
-              item.label,
+              item.label.tr(),
+
               style: TextStyle(
                 fontSize: width * 0.035,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,

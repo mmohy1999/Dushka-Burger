@@ -38,20 +38,24 @@ class CartRemoveRequest {
 class CartRequestItem {
   final int productId;
   final int quantity;
-  final List<CartRequestAddon> addons;
+  final List<CartRequestAddon>? addons;
 
   CartRequestItem({
     required this.productId,
     required this.quantity,
-    this.addons = const [],
+    this.addons,
   });
 
   Map<String, dynamic> toJson() {
-    return {
+    final data = <String, dynamic>{
       'product_id': productId,
       'quantity': quantity,
-      'addons': addons.map((addon) => addon.toJson()).toList(),
     };
+    final addonList = addons;
+    if (addonList != null && addonList.isNotEmpty) {
+      data['addons'] = addonList.map((addon) => addon.toJson()).toList();
+    }
+    return data;
   }
 }
 

@@ -5,6 +5,7 @@ import 'package:dushka_burger/Presentation/manager/cart_manger/cart_cubit.dart';
 import 'package:dushka_burger/core/resource_manager/routes_manager.dart';
 import 'package:dushka_burger/core/theming/app_color.dart';
 import 'package:dushka_burger/core/utils/extentions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +19,7 @@ class MenuProductCard extends StatelessWidget {
     final width = context.width;
     final height = context.height;
     final imageSize = width * 0.2;
+    final isArabic = context.locale.languageCode == 'ar';
     void openProductDetails() {
       context.pushNamed(Routes.productDetails, arguments: {
         'product': product,
@@ -55,7 +57,7 @@ class MenuProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      displayProductName(product),
+                      displayProductName(product, isArabic: isArabic),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(

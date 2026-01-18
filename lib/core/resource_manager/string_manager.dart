@@ -19,6 +19,11 @@ class StringManager {
  static const String menu = 'Menu';
  static const String offers = 'Offers';
  static const String account = 'Account';
+ static const String settings = 'Settings';
+ static const String language = 'Language';
+ static const String selectLanguage = 'Select language';
+ static const String english = 'English';
+ static const String arabic = 'Arabic';
  static const String productDetails = 'Product Details';
  static const String addon = 'Addon';
  static const String option = 'Option';

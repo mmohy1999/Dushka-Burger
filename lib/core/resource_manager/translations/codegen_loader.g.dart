@@ -14,8 +14,45 @@ class CodegenLoader extends AssetLoader {
   }
 
   static const Map<String, dynamic> ar = {
-     StringManager.back: 'الرجوع',
-    
+    StringManager.addToCart: 'أضف إلى السلة',
+    StringManager.back: 'الرجوع',
+    StringManager.yourCart: 'سلتك',
+    StringManager.cartEmpty: 'سلتك فارغة',
+    StringManager.extras: 'الإضافات',
+    StringManager.enterCouponHint: 'أدخل كوبونك ...',
+    StringManager.apply: 'تطبيق',
+    StringManager.paymentDetails: 'تفاصيل الدفع',
+    StringManager.totalPrice: 'السعر الإجمالي',
+    StringManager.vat: 'ضريبة القيمة المضافة',
+    StringManager.totalPayment: 'إجمالي الدفع',
+    StringManager.proceedToCheckout: 'المتابعة للدفع',
+    StringManager.currencyEgp: 'ج.م',
+    StringManager.item: 'عنصر',
+    StringManager.noProductsFound: 'لا توجد منتجات حالياً',
+    StringManager.home: 'الرئيسية',
+    StringManager.menu: 'القائمة',
+    StringManager.offers: 'العروض',
+    StringManager.account: 'الحساب',
+    StringManager.settings: 'الإعدادات',
+    StringManager.language: 'اللغة',
+    StringManager.selectLanguage: 'اختر اللغة',
+    StringManager.english: 'الإنجليزية',
+    StringManager.arabic: 'العربية',
+    StringManager.productDetails: 'تفاصيل المنتج',
+    StringManager.addon: 'إضافة',
+    StringManager.option: 'خيار',
+    StringManager.requiredIndicator: ' *',
+    StringManager.category: 'الفئة',
+    StringManager.noDescriptionAvailable: 'لا يوجد وصف متاح.',
+    StringManager.zero: '0',
+    StringManager.genericError: 'حدث خطأ ما',
+    StringManager.unexpectedError: 'حدث خطأ',
+    StringManager.notFoundError: 'تعذر العثور على المورد المطلوب.',
+    StringManager.serverError: 'عذراً! حدث خطأ من جانبنا.',
+    StringManager.networkError:
+        'يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.',
+    StringManager.unknownValue: 'غير معروف',
+    StringManager.retry: 'إعادة المحاولة',
   };
 
   static const Map<String, dynamic> en = {

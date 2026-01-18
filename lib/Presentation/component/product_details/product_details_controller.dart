@@ -81,13 +81,14 @@ class ProductDetailsController {
 
   List<CartRequestItem> buildCartItems(
     Product product,
-    AddonsResponse response,
-  ) {
+    AddonsResponse response, {
+    required bool isArabic,
+  }) {
     return [
       CartRequestItem(
         productId: product.id,
         quantity: quantity,
-        addons: _buildSelectedAddons(response),
+        addons: _buildSelectedAddons(response, isArabic: isArabic),
       ),
     ];
   }
@@ -97,7 +98,12 @@ class ProductDetailsController {
     Product product,
     AddonsResponse response,
   ) async {
-    final items = buildCartItems(product, response);
+    final isArabic = context.locale.languageCode == 'ar';
+    final items = buildCartItems(
+      product,
+      response,
+      isArabic: isArabic,
+    );
     showBlockingAnimation(context, AppImages.burgerLoadingAnimation);
     final success = await context.read<CartCubit>().addToCart(items);
     if (!isMounted()) {
@@ -116,7 +122,10 @@ class ProductDetailsController {
     }
   }
 
-  List<CartRequestAddon> _buildSelectedAddons(AddonsResponse response) {
+  List<CartRequestAddon> _buildSelectedAddons(
+    AddonsResponse response, {
+    required bool isArabic,
+  }) {
     final addons = <CartRequestAddon>[];
     for (final block in response.blocks) {
       for (final addon in block.addons) {
@@ -132,7 +141,7 @@ class ProductDetailsController {
           addons.add(
             CartRequestAddon(
               id: _resolveAddonId(addon, option),
-              name: _addonNameForCart(option),
+              name: _addonNameForCart(option, isArabic: isArabic),
               price: _addonPriceForCart(option),
             ),
           );
@@ -149,13 +158,13 @@ class ProductDetailsController {
     return int.tryParse(addon.id) ?? 0;
   }
 
-  String _addonNameForCart(AddonOption option) {
+  String _addonNameForCart(AddonOption option, {required bool isArabic}) {
     final labelInCart = option.labelInCartOpt.trim();
     if (labelInCart.isNotEmpty) return labelInCart;
-    final label = option.label.trim();
-    if (label.isNotEmpty) return label;
-    final labelAr = option.labelAr.trim();
-    if (labelAr.isNotEmpty) return labelAr;
+    final primary = isArabic ? option.labelAr.trim() : option.label.trim();
+    if (primary.isNotEmpty) return primary;
+    final fallback = isArabic ? option.label.trim() : option.labelAr.trim();
+    if (fallback.isNotEmpty) return fallback;
     return StringManager.addon.tr();
   }
 
